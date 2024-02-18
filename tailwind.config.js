@@ -9,6 +9,8 @@ module.exports = {
         purple: '#e64fdc',
         white: '#ffffff',
         black: '#000000',
+        offwhite: '#feffee',
+        green: '#00b332',
       }
     }
   },

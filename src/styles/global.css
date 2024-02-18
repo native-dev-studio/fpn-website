@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'mailchimp';
-
 @layer base {
   body {
-    @apply bg-black text-white;
+    @apply bg-offwhite text-black;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -57,14 +55,24 @@
   width: 100%;
 }
 
+.border-right-none {
+  border-right: none;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.border-left-none {
+  border-left: none;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 .container {
-  max-width: 1300px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-.intro-section {
-  padding: 0 36px;
-  width: 50%;
+.hero {
 }
 
 .signup-section {
