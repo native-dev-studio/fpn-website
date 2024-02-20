@@ -21,7 +21,7 @@ const IndexPage = () => {
                 <span className='text-green'>Control</span> money you send before it arrives
               </h1>
               <p className='sm:text-2xl text-xl font-medium'>
-                FPN tracks money you send back home and control how it’s spent using mobile money checks.  
+                FPN tracks money you send back home and control how it’s spent with mobile money checks.  
               </p>
               <div className='space-y-4'>
                 <input 
