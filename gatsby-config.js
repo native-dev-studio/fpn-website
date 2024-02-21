@@ -1,7 +1,6 @@
 const path = require('path');
 
 const config = {
-  pathPrefix: `/fpn-website`,
   siteMetadata: {
     siteUrl: `https://sechento.com`,
   },
