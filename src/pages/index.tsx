@@ -1,10 +1,39 @@
-import * as React from "react";
+import React, { useState } from "react";
 import africaSrc from '../images/africa.png';
 import cardSrc from '../images/card.png';
 import cardSrc2 from '../images/card2.png';
 import cardSrc3 from '../images/card3.png';
 
 const IndexPage = () => {
+  const [email, setEmail] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [emailState, setEmailState] = useState<null | boolean>(null);
+
+  const handleSubmit = async (e: any) => {
+    setDisabled(true);
+    e.preventDefault();
+
+    try {
+      const url = 'https://api.sechento.com/signups';
+      const resp = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      })
+
+      const data = await resp.json();
+
+      setEmail('');
+      setDisabled(false);
+      setEmailState(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <main className="main">
@@ -16,39 +45,49 @@ const IndexPage = () => {
             <div className='flex flex-row-reverse'>
               <img src={africaSrc} className='w-2/12'/>
             </div>
-            <div className='hero pb-8 space-y-6 lg:w-10/12'>
+            <div className='hero space-y-6 lg:w-10/12'>
               <h1 className='md:text-7xl text-5xl font-black'>
                 <span className='text-green'>Control</span> money you send before it arrives
               </h1>
-              <p className='sm:text-2xl text-xl font-medium'>
+              <div className='sm:text-2xl text-xl font-medium'>
                 FPN tracks money you send back home and control how it’s spent with mobile money checks.  
-              </p>
-              <div className='space-y-4'>
-                <input 
-                  type="email"
-                  placeholder="Enter email"
-                  value="" name="EMAIL"
-                  className="
-                    placeholder:text-gray placeholder:text-lg
-                    rounded-md
-                    p-6 border-solid border-2 border-[#A8A8A8]
-                    w-full sm:w-5/12
-                  "
-                  required 
-                />
-                <input 
-                  type="submit"
-                  value="Sign Up"
-                  name="subscribe"
-                  className="
-                    p-6 border-solid border-2 border-[#A8A8A8]
-                    placeholder:text-gray placeholder:text-lg
-                    bg-green text-white
-                    sm:m-2 
-                    w-full sm:w-28
-                    rounded-md
-                  "
-                />
+              </div>
+              <div>
+                <form onSubmit={handleSubmit} className='space-y-4'>
+                  <input 
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="
+                      placeholder:text-gray placeholder:text-lg
+                      rounded-md
+                      p-6 border-solid border-2 border-[#A8A8A8]
+                      w-full sm:w-5/12
+                    "
+                    required 
+                  />
+                  <button 
+                    type="submit"
+                    disabled={disabled}
+                    className="
+                      p-6 border-solid border-2 border-[#A8A8A8]
+                      placeholder:text-gray placeholder:text-lg
+                      bg-green text-white
+                      disabled:opacity-25
+                      sm:m-2 
+                      w-full sm:w-28
+                      rounded-md
+                    "
+                  >
+                    Submit
+                  </button>
+                </form>
+              { emailState && (
+                <div className='text-sm font-bold text-green mt-3'>
+                  You're all set. Watch your inbox!
+                </div>
+              )}
               </div>
             </div>
           </section>
@@ -89,32 +128,42 @@ const IndexPage = () => {
             <div className="text-center font-medium text-2xl">
               Get control and verification of your recipient's spending the next time you send money.
             </div>
-            <div className='space-y-4 w-full'>
-              <input 
-                type="email"
-                placeholder="Enter email"
-                value="" name="EMAIL"
-                className="
-                placeholder:text-gray placeholder:text-lg
-                rounded-md
-                p-6 border-solid border-2 border-[#A8A8A8]
-                w-full sm:w-5/12
-                "
-                required 
-              />
-              <input 
-                type="submit"
-                value="Sign Up"
-                name="subscribe"
-                className="
-                p-6 border-solid border-2 border-[#A8A8A8]
-                placeholder:text-gray placeholder:text-lg
-                bg-green text-white
-                sm:m-2 
-                w-full sm:w-28
-                rounded-md
-                "
-              />
+            <div className='w-full'>
+              <form onSubmit={handleSubmit} className='space-y-4'>
+                <input 
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="
+                    placeholder:text-gray placeholder:text-lg
+                    rounded-md
+                    p-6 border-solid border-2 border-[#A8A8A8]
+                    w-full sm:w-5/12
+                  "
+                  required 
+                />
+                <button 
+                  type="submit"
+                  disabled={disabled}
+                  className="
+                    p-6 border-solid border-2 border-[#A8A8A8]
+                    placeholder:text-gray placeholder:text-lg
+                    bg-green text-white
+                    disabled:opacity-25
+                    sm:m-2 
+                    w-full sm:w-28
+                    rounded-md
+                  "
+                >
+                  Submit
+                </button>
+              </form>
+              { emailState && (
+                <div className='text-sm font-bold text-green mt-3'>
+                  You're all set. Watch your inbox!
+                </div>
+              )}
             </div>
           </section>
           <footer className="

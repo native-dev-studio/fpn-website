@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@mailerlite/mailerlite-nodejs": "^1.2.1",
     "gatsby": "^4.24.5",
     "gatsby-background-image": "^1.6.0",
     "gatsby-plugin-image": "^2.14.1",
